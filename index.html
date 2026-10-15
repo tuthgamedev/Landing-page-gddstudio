@@ -161,10 +161,24 @@
     margin-bottom: 40px;
   }
   .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
-  .hero-sandbox { width: min(100%, 500px); margin-top: 28px; padding: 18px; border: 1px solid var(--bd-d8d4ce); background: var(--bg-fafaf8); box-shadow: 6px 6px 0 rgba(26,26,26,.07); }
+  .demo-section { background: var(--bg-f0ede8); }
+  .demo-inner { max-width: 1120px; margin: 0 auto; }
+  .demo-panel { display: grid; grid-template-columns: minmax(0,.82fr) minmax(0,1.18fr); align-items: center; gap: clamp(32px,6vw,80px); }
+  .demo-intro { max-width: 420px; }
+  .demo-intro .section-label { color: #E85D3F; margin-bottom: 14px; }
+  .demo-intro h2 { margin-bottom: 18px; }
+  .demo-intro .section-sub { margin-bottom: 28px; }
+  .demo-steps { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; }
+  .demo-steps li { display: flex; align-items: center; gap: 12px; color: var(--fg-6b6b6b); font-size: 13px; }
+  .demo-steps li > span:first-child { display: grid; place-items: center; width: 28px; height: 28px; flex: 0 0 28px; border: 1px solid var(--bd-d8d4ce); color: #E85D3F; font: 600 10px 'IBM Plex Mono',monospace; }
+  .demo-steps li > span:last-child { display: block; min-width: 0; color: var(--fg-6b6b6b); line-height: 1.5; }
+  .demo-card { width: 100%; padding: 24px; border: 1px solid var(--bd-d8d4ce); background: var(--bg-fafaf8); box-shadow: 8px 8px 0 rgba(26,26,26,.08); transition: transform .25s,box-shadow .25s; }
+  .demo-card:hover { transform: translate(-3px,-3px); box-shadow: 11px 11px 0 rgba(26,26,26,.1); }
+  @media (max-width:900px) { .demo-panel { grid-template-columns: 1fr; gap: 32px; } .demo-intro { max-width: 640px; } }
+  @media (max-width:520px) { .demo-card { padding: 18px; } .demo-card .sandbox-actions { align-items: flex-start; flex-direction: column; } }
   .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
-  .hero-sandbox-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; }
-  .hero-sandbox-head strong { font:600 13px 'Space Grotesk',sans-serif; }
+  .demo-card-head { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:10px; }
+  .demo-card-head strong { font:600 14px 'Space Grotesk',sans-serif; }
   .sandbox-demo-tag { color:#E85D3F; font:600 9px 'IBM Plex Mono',monospace; letter-spacing:.08em; text-transform:uppercase; }
   .sandbox-prompt { width:100%; min-height:76px; resize:vertical; padding:10px 12px; border:1px solid var(--bd-d8d4ce); background:var(--bg-ffffff); color:var(--fg-1a1a1a); font:13px/1.55 'Inter',sans-serif; }
   .sandbox-prompt:focus-visible { outline:2px solid #E85D3F; outline-offset:2px; }
@@ -185,7 +199,7 @@
   .plan-popular { display:inline-flex; width:fit-content; align-items:center; gap:6px; margin:0 0 12px; padding:5px 8px; border:1px solid rgba(245,196,186,.4); color:#F5C4BA; font:600 9px 'Space Grotesk',sans-serif; letter-spacing:.04em; }
   .plan-popular::before { content:''; width:6px; height:6px; border-radius:50%; background:#E85D3F; box-shadow:0 0 0 3px rgba(232,93,63,.18); }
   .pricing-plan.featured .plan-popular { color:#F5C4BA !important; }
-  @media (prefers-reduced-motion: reduce) { .sandbox-result { animation:none; } .sandbox-generate { transition:none; } }
+  @media (prefers-reduced-motion: reduce) { .sandbox-result { animation:none; } .sandbox-generate,.demo-card { transition:none; } }
   .btn-primary {
     font-family: 'Space Grotesk', sans-serif;
     font-size: 15px; font-weight: 600;
@@ -196,12 +210,13 @@
   }
   .btn-primary:hover { background: #E85D3F; }
   .btn-secondary {
+    display: inline-flex; align-items: center; justify-content: center;
     font-family: 'Space Grotesk', sans-serif;
     font-size: 15px; font-weight: 500;
     padding: 13px 28px;
     background: transparent; color: var(--fg-1a1a1a);
     border: 1.5px solid var(--bd-1a1a1a);
-    cursor: pointer;
+    cursor: pointer; text-decoration: none;
     transition: border-color .2s, color .2s;
   }
   .btn-secondary:hover { border-color: #E85D3F; color: #E85D3F; }
@@ -807,6 +822,7 @@ html[lang=id] h1 em{max-width:100%;overflow-wrap:anywhere}
     <a href="#how">How it works</a>
     <a href="#features">Features</a>
     <a href="#contoh">Example GDD</a>
+    <a href="#demo" data-en="Demo" data-id="Demo">Demo</a>
     <a href="#pricing">Pricing</a>
     <a href="#faq">FAQ</a>
   </div>
@@ -821,15 +837,8 @@ html[lang=id] h1 em{max-width:100%;overflow-wrap:anywhere}
     <h1>Design your game.<br><em>Document</em><br>your vision.</h1>
     <p class="hero-sub">GDDStudio helps solo devs, indie teams, and studios create structured, collaborative Game Design Documents — from blank page to full blueprint.</p>
     <div class="hero-actions">
-      <button class="btn-primary" type="button" data-focus-sandbox data-en="Try the sandbox" data-id="Coba sandbox">Try the sandbox</button>
-      <button class="btn-secondary" type="button" data-open-sample>See a sample GDD</button>
-    </div>
-    <div class="hero-sandbox" aria-labelledby="sandbox-title">
-      <div class="hero-sandbox-head"><strong id="sandbox-title" data-en="Try your game idea" data-id="Coba ide game-mu">Try your game idea</strong><span class="sandbox-demo-tag" data-en="Instant demo" data-id="Demo langsung">Instant demo</span></div>
-      <label class="sr-only" for="sandbox-prompt" data-en="Describe your game idea" data-id="Ceritakan ide game-mu">Describe your game idea</label>
-      <textarea id="sandbox-prompt" class="sandbox-prompt" maxlength="180" data-placeholder-en="A cozy game about restoring an old lighthouse..." data-placeholder-id="Game santai tentang memperbaiki mercusuar tua..." placeholder="A cozy game about restoring an old lighthouse..."></textarea>
-      <div class="sandbox-actions"><span class="sandbox-hint" data-en="No account needed · demo runs in this page" data-id="Tanpa akun · demo berjalan di halaman ini">No account needed · demo runs in this page</span><button class="sandbox-generate" type="button" id="sandbox-generate" data-en="Show a teaser →" data-id="Lihat cuplikan →">Show a teaser →</button></div>
-      <div class="sandbox-result" id="sandbox-result" aria-live="polite" aria-atomic="true"><span class="sandbox-result-label" data-en="Example draft · not AI generated" data-id="Contoh draf · bukan hasil AI">Example draft · not AI generated</span><p id="sandbox-output"></p><div class="sandbox-next-actions"><button type="button" id="sandbox-refine" data-en="Refine your idea" data-id="Sempurnakan ide">Refine your idea</button><button type="button" data-login data-en="Sign in to save in workspace" data-id="Login untuk menyimpan ke ruang kerja">Sign in to save in workspace</button></div></div>
+      <button class="btn-primary" type="button" data-focus-sandbox data-en="Try the demo" data-id="Coba demo">Try the demo</button>
+      <a class="btn-secondary" href="#contoh" data-en="See a sample GDD" data-id="Lihat contoh GDD">See a sample GDD</a>
     </div>
     <div class="hero-stats">
       <div>
@@ -1530,6 +1539,31 @@ html[lang=id] h1 em{max-width:100%;overflow-wrap:anywhere}
   <article class="sample-document" aria-labelledby="sample-card-title"><div class="document-topline"><span>GDD / 001</span><span>Fictional example · 2D RPG</span></div><h3 id="sample-card-title">Ember Quest</h3><p class="document-lead">Restore the village's light, one lantern at a time.</p><dl><div><dt>01 · Concept</dt><dd>A 2D adventure for players who enjoy short exploration sessions and light puzzles.</dd></div><div><dt>02 · Gameplay loop</dt><dd>Explore the forest → collect embers → light lanterns → unlock new paths.</dd></div><div><dt>03 · First-version scope</dt><dd>One forest area, three puzzles, and one enemy type. Target session: 10 minutes.</dd></div></dl><div class="document-bottomline"><span>Clear goals.</span><span>Defined scope.</span></div><button class="sample-open" type="button" data-open-sample aria-haspopup="dialog" aria-controls="sample-dialog"><span>Open full GDD</span><span class="sample-open-arrow" aria-hidden="true">↗</span></button></article>
 </div></section>
 
+<!-- INTERACTIVE DEMO -->
+<section class="demo-section" id="demo" aria-labelledby="demo-title">
+  <div class="demo-inner">
+    <div class="demo-panel">
+      <div class="demo-intro">
+        <div class="section-label" data-en="INTERACTIVE PREVIEW" data-id="PRATINJAU INTERAKTIF">INTERACTIVE PREVIEW</div>
+        <h2 id="demo-title" data-en="See your game idea take shape" data-id="Lihat ide game-mu mulai terbentuk">See your game idea take shape</h2>
+        <p class="section-sub" data-en="Write one sentence about your game and preview how GDDStudio can help you shape it into a clear starting point." data-id="Tulis satu kalimat tentang game-mu dan lihat bagaimana GDDStudio membantu menyusunnya menjadi titik awal yang lebih jelas.">Write one sentence about your game and preview how GDDStudio can help you shape it into a clear starting point.</p>
+        <ul class="demo-steps">
+          <li><span>01</span><span data-en="Start with a simple game idea" data-id="Mulai dari ide game sederhana">Start with a simple game idea</span></li>
+          <li><span>02</span><span data-en="Get a sample planning prompt" data-id="Dapatkan contoh arahan perencanaan">Get a sample planning prompt</span></li>
+          <li><span>03</span><span data-en="Explore the full workspace when ready" data-id="Jelajahi ruang kerja lengkap saat siap">Explore the full workspace when ready</span></li>
+        </ul>
+      </div>
+      <div class="demo-card" aria-labelledby="sandbox-title">
+      <div class="demo-card-head"><strong id="sandbox-title" data-en="Try your game idea" data-id="Coba ide game-mu">Try your game idea</strong><span class="sandbox-demo-tag" data-en="Instant demo" data-id="Demo langsung">Instant demo</span></div>
+      <label class="sr-only" for="sandbox-prompt" data-en="Describe your game idea" data-id="Ceritakan ide game-mu">Describe your game idea</label>
+      <textarea id="sandbox-prompt" class="sandbox-prompt" maxlength="180" data-placeholder-en="A cozy game about restoring an old lighthouse..." data-placeholder-id="Game santai tentang memperbaiki mercusuar tua..." placeholder="A cozy game about restoring an old lighthouse..."></textarea>
+      <div class="sandbox-actions"><span class="sandbox-hint" data-en="No account needed · demo runs in this page" data-id="Tanpa akun · demo berjalan di halaman ini">No account needed · demo runs in this page</span><button class="sandbox-generate" type="button" id="sandbox-generate" data-en="Show a teaser →" data-id="Lihat cuplikan →">Show a teaser →</button></div>
+      <div class="sandbox-result" id="sandbox-result" aria-live="polite" aria-atomic="true"><span class="sandbox-result-label" data-en="Example draft · not AI generated" data-id="Contoh draf · bukan hasil AI">Example draft · not AI generated</span><p id="sandbox-output"></p><div class="sandbox-next-actions"><button type="button" id="sandbox-refine" data-en="Refine your idea" data-id="Sempurnakan ide">Refine your idea</button><button type="button" data-login data-en="Sign in to save in workspace" data-id="Login untuk menyimpan ke ruang kerja">Sign in to save in workspace</button></div></div>
+    </div>
+    </div>
+  </div>
+</section>
+
 <!-- PRICING -->
 <section class="pricing" id="pricing">
   <div class="pricing-inner">
@@ -1950,7 +1984,7 @@ html[lang=id] h1 em{max-width:100%;overflow-wrap:anywhere}
 
     // Reveal saat scroll (elemen dilepas dari kelas reveal setelah selesai agar hover tidak terganggu)
     if ('IntersectionObserver' in window && !reduce) {
-      const sel = '.how .section-label,.how h2,.how .section-sub,.step,.features .section-label,.features h2,.features .section-sub,.feat-tabs,.feat-panels,.pricing .section-label,.pricing h2,.pricing .section-sub,.pricing-plan,.faq .section-label,.faq h2,.faq-item,.cta-banner h2,.cta-banner p,.cta-banner .btn-primary';
+      const sel = '.demo-intro .section-label,.demo-intro h2,.demo-intro .section-sub,.demo-steps li,.demo-card,.how .section-label,.how h2,.how .section-sub,.step,.features .section-label,.features h2,.features .section-sub,.feat-tabs,.feat-panels,.pricing .section-label,.pricing h2,.pricing .section-sub,.pricing-plan,.faq .section-label,.faq h2,.faq-item,.cta-banner h2,.cta-banner p,.cta-banner .btn-primary';
       const targets = $$(sel);
       targets.forEach(el => { el.classList.add('rv'); el.style.setProperty('--d', ((Array.from(el.parentNode.children).indexOf(el) % 4) * 0.08) + 's'); });
       const io = new IntersectionObserver(es => es.forEach(e => {
